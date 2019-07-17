@@ -14,11 +14,20 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isSubmitted  =  false;
   isCorrect = false;
+
+  IsLogged : boolean = false;
+
   
 
   constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) { }
 
-  ngOnInit() { this.loginForm  =  this.formBuilder.group({
+  ngOnInit() { 
+    if(this.authService.isLoggedIn())
+    {
+      this.IsLogged=true;
+      this.router.navigateByUrl('/');
+    }
+    this.loginForm  =  this.formBuilder.group({
         email: ['', Validators.required],
         password: ['', Validators.required]
     });
@@ -37,6 +46,8 @@ login(){
    { this.authService.login(this.loginForm.value);
     this.isCorrect=true;
     this.router.navigateByUrl('/');
+    location.reload()
+    
   }
 
   else if(this.loginForm.controls.email.value==this.loginForm.controls.password.value &&
@@ -44,6 +55,7 @@ login(){
    { this.authService.login(this.loginForm.value);
     this.isCorrect=true;
     this.router.navigateByUrl('/');
+    location.reload()
   } 
 
   else if(this.loginForm.controls.email.value==this.loginForm.controls.password.value &&
@@ -51,11 +63,14 @@ login(){
    { this.authService.login(this.loginForm.value);
     this.isCorrect=true;
     this.router.navigateByUrl('/');
+    location.reload()
+    
   }
   else 
   { this.isCorrect=false;
     return;
   }
+  
 }
 
 }
