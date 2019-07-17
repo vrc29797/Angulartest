@@ -5,28 +5,25 @@ import { User } from './user';
   providedIn: 'root'
 })
 export class AuthService {
+  constructor() {}
 
-  constructor() { }
-
-  public login(userInfo: User){
+  public login(userInfo: User) {
     localStorage.setItem('ACCESS_TOKEN', userInfo.email);
-    
   }
 
-  public isLoggedIn() : boolean{
-    if(localStorage.length>0)
-    {
+  public isLoggedIn(): boolean {
+    if (localStorage.length > 0) {
       return true;
+    } else {
+      return false;
     }
-    else return false;
-
   }
 
-  public logout(){
+  public logout() {
     localStorage.removeItem('ACCESS_TOKEN');
   }
 
-  public getUserName() : string {
-    return localStorage.getItem('ACCESS_TOKEN').toString() ;
+  public getUserName(): string {
+    return localStorage.getItem('ACCESS_TOKEN').toString();
   }
 }
