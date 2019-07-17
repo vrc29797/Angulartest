@@ -1,56 +1,61 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from  '@angular/router';
+import { User } from  '../user';
+import { AuthService } from  '../auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
-  messageForm: FormGroup;
-  submitted = false;
-  success = false;
-  userType = 'requester';
-
-  constructor(private formBuilder: FormBuilder) { }
-
-  ngOnInit() {this.messageForm = this.formBuilder.group({
-    name: ['', Validators.required],
-    message: ['', Validators.required]
-  });
-}
-
-onSubmit() {
-  this.submitted = true;
-
-  if (this.messageForm.invalid) {
-      return;
-  }
-
-  if (this.messageForm.controls.name.value == this.messageForm.controls.message.value 
-    && this.messageForm.controls.message.value == 'admin')
-  {
-    this.success = true;
-    this.userType = 'Admin'
-  }
-  else if (this.messageForm.controls.name.value == this.messageForm.controls.message.value 
-    && this.messageForm.controls.message.value == 'req')
-  {
-    this.success = true;
-    this.userType = 'Requester'
-  } 
+  loginForm: FormGroup;
+  isSubmitted  =  false;
+  isCorrect = false;
   
-  else if (this.messageForm.controls.name.value == this.messageForm.controls.message.value 
-    && this.messageForm.controls.message.value == 'pro')
-  {
-    this.success = true;
-    this.userType = 'Provider'
+
+  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) { }
+
+  ngOnInit() { this.loginForm  =  this.formBuilder.group({
+        email: ['', Validators.required],
+        password: ['', Validators.required]
+    });
+}
+get formControls() { return this.loginForm.controls; }
+
+login(){
+  console.log(this.loginForm.value);
+
+  this.isSubmitted = true;
+  if(this.loginForm.invalid){
+    return;
+  }
+  if(this.loginForm.controls.email.value==this.loginForm.controls.password.value &&
+    this.loginForm.controls.email.value=='admin')
+   { this.authService.login(this.loginForm.value);
+    this.isCorrect=true;
+    this.router.navigateByUrl('/');
   }
 
-  else 
-  this.success = false;
+  else if(this.loginForm.controls.email.value==this.loginForm.controls.password.value &&
+    this.loginForm.controls.email.value=='req')
+   { this.authService.login(this.loginForm.value);
+    this.isCorrect=true;
+    this.router.navigateByUrl('/');
+  } 
 
- 
+  else if(this.loginForm.controls.email.value==this.loginForm.controls.password.value &&
+    this.loginForm.controls.email.value=='pro')
+   { this.authService.login(this.loginForm.value);
+    this.isCorrect=true;
+    this.router.navigateByUrl('/');
+  }
+  else 
+  { this.isCorrect=false;
+    return;
+  }
 }
 
 }
