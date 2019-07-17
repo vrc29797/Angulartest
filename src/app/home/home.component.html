@@ -1,8 +1,21 @@
-<h1>Users</h1>
+<h1>Available Products</h1>
 
-<ul *ngIf="users">
-  <li *ngFor="let user of users.data">
-    <img [src]="user.avatar">
-    <p>{{ user.first_name }} {{ user.last_name }}</p>
+<small>If you are a requester, you can give a quotation for each of the products, which will then be looked over by the
+  provider.</small>
+
+<ul *ngIf="products">
+  <li *ngFor="let product of products; index as productId" class="d-flex">
+    <div class="mr-3 d-flex">
+      <img [src]="product.image" class="my-auto">
+    </div>
+    <div>
+      <h3>
+        <a [title]="product.name + ' details'" [routerLink]="['/products',productId]">
+          {{product.name}}
+        </a>
+      </h3>
+      <p>{{ product.description }}</p>
+      <button class="btn btn-small btn-outline-dark" (click)="requestProduct(product)">Request</button>
+    </div>
   </li>
 </ul>
