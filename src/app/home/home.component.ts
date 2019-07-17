@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { DataService } from "../data.service";
 
+
 import { products } from "../products";
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: "app-home",
@@ -10,7 +12,8 @@ import { products } from "../products";
 })
 export class HomeComponent implements OnInit {
   products;
-  constructor(private data: DataService) {}
+  user;
+  constructor(private data: DataService, private authService: AuthService) {}
 
   ngOnInit() {
     // get all product data from the products fake service
@@ -19,6 +22,7 @@ export class HomeComponent implements OnInit {
     //   console.log(this.products);
     // });
     this.products = products;
+    this.user=this.authService.getUserName();
   }
 
   requestProduct(product) {

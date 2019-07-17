@@ -1,9 +1,61 @@
 <h2>Product Details</h2>
 
 <div *ngIf="product">
-  <img [src]="product.image" alt="Product Image" height="200" class="m-2">
+  <div class="d-flex">
+    <img [src]="product.image" alt="Product Image" height="200" class="m-2 mr-5">
+    <div class="details-container d-flex flex-column justify-content-around">
+      <div>
+        <small class="d-block">Stock Available</small>
+        <span>{{product.inStock}}</span>
+      </div>
+      <div>
+        <small class="d-block">Availability</small>
+        <span>From: {{product.availableFrom}}, To: {{product.availableFrom}}</span>
+      </div>
+    </div>
+  </div>
   <h4>{{product.name}}</h4>
   <small>{{product.description}}</small>
+
   <hr>
-  <p>When available:</p>
+  <div *ngIf="user=='req'">
+    <p class="h4">To request this equipment, fill the following form:</p>
+    <form [formGroup]="requestForm" class="request-container" (ngSubmit)="requestProduct(product)">
+
+      <label class="d-block mb-2 max-width">
+        Quotation (in USD):
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+          <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="quotation" id="quotation">
+          <div class="input-group-append">
+            <span class="input-group-text">.00</span>
+          </div>
+        </div>
+      </label>
+
+      <label class="d-block mb-2 max-width">
+        Number of Products Required :
+        <input class="form-control" type="number" name="numberRequired" id="numberRequired">
+      </label>
+
+      <p class="mb-1">Procurement Dates</p>
+
+      <div class="input-group max-width">
+        <div class="input-group-prepend">
+          <span class="input-group-text">From</span>
+        </div>
+        <input class="form-control" type="date" name="fromDate" id="fromDate">
+        <input class="form-control" type="date" name="toDate" id="toDate">
+        <div class="input-group-append">
+          <span class="input-group-text">To</span>
+        </div>
+      </div>
+
+      <p class="mt-4">
+        <input class="btn btn-sm btn-dark" type="submit" value="Request">
+      </p>
+    </form>
+  </div>
 </div>

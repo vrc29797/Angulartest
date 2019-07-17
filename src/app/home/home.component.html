@@ -8,14 +8,19 @@
     <div class="mr-3 d-flex">
       <img [src]="product.image" class="my-auto">
     </div>
-    <div>
+    <div >
       <h3>
-        <a [title]="product.name + ' details'" [routerLink]="['/products',productId]">
+        <a  [title]="product.name + ' details'" [routerLink]="['/products',productId]">
           {{product.name}}
         </a>
       </h3>
       <p>{{ product.description }}</p>
-      <button class="btn btn-small btn-outline-dark" (click)="requestProduct(product)">Request</button>
+      <a class="btn btn-small btn-outline-dark" [title]="product.name + ' details'" [routerLink]="['/products',productId]" *ngIf="user=='req'">
+        Request
+      </a>
+      <a class="btn btn-small btn-outline-dark" [title]="product.name + ' details'" [routerLink]="['/products',productId]" *ngIf="user=='pro'">
+        Respond
+      </a>
     </div>
   </li>
 </ul>

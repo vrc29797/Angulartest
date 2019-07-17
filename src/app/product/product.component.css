@@ -1,0 +1,10 @@
+.form-control {
+    max-width: 400px;
+}
+input[type=date] {
+    max-width: 200px;
+}
+
+.max-width {
+    max-width: 400px;
+}
