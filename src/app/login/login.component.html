@@ -2,7 +2,9 @@
 
 <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
 
-    <h5 *ngIf="success">Login Successfull!</h5>
+    <h5 *ngIf="success && success">Login Successfull!</h5>
+    <h5 *ngIf="submitted && !success">Login Failed!</h5>
+    
 
     <label>
       UserId:

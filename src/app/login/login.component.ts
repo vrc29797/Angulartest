@@ -10,6 +10,7 @@ export class LoginComponent implements OnInit {
   messageForm: FormGroup;
   submitted = false;
   success = false;
+  userType = 'requester';
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -26,10 +27,26 @@ onSubmit() {
       return;
   }
 
-  if (this.messageForm.controls.name.value = this.messageForm.controls.message.value)
+  if (this.messageForm.controls.name.value == this.messageForm.controls.message.value 
+    && this.messageForm.controls.message.value == 'admin')
   {
     this.success = true;
+    this.userType = 'Admin'
   }
+  else if (this.messageForm.controls.name.value == this.messageForm.controls.message.value 
+    && this.messageForm.controls.message.value == 'req')
+  {
+    this.success = true;
+    this.userType = 'Requester'
+  } 
+  
+  else if (this.messageForm.controls.name.value == this.messageForm.controls.message.value 
+    && this.messageForm.controls.message.value == 'pro')
+  {
+    this.success = true;
+    this.userType = 'Provider'
+  }
+
   else 
   this.success = false;
 
