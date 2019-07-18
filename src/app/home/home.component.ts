@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   }
 
   getProducts(){
-    products =  localStorage.getItem('products');
+    this.products =  localStorage.getItem('products');
   }
   requestProduct(product) {
     console.log("Requested the product ", product);
