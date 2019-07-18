@@ -16,12 +16,17 @@ export class ProductComponent implements OnInit {
   product;
   user;
   requestForm : FormGroup;
+  responseForm: FormGroup;
   isSubmitted  =  false;
 
   quotation;
   fromDate;
   toDate;
   quantity;
+  reqMessage = 'Request Submitted';
+  instock = false;
+
+  requestDetails;
 
 
   constructor(
@@ -44,29 +49,57 @@ export class ProductComponent implements OnInit {
       toDate : ['', Validators.required],
       quantity : ['', Validators.required]
     });
+
+    this.responseForm  =  this.formBuilder.group({
+      quotation: ['', Validators.required]
+    });
+
+    if(localStorage.getItem('requestDetails')) {
+      this.requestDetails = JSON.parse(localStorage.getItem('requestDetails'));
+    }
+
   }
   get formControls() { return this.requestForm.controls; }
   
   requestProduct(product) {
     console.log(this.requestForm.value);
-    console.log(product.id);
 
-    this.isSubmitted=true;
     if(this.requestForm.invalid) {
       return;
     }
+    this.isSubmitted=true;
 
-    this.quotation=this.requestForm.controls.quotation.value;
-    this.quantity=this.requestForm.controls.quantity.value;
-    this.fromDate = this.requestForm.controls.fromDate.value;
-    this.toDate = this.requestForm.controls.toDate.value;
+    this.requestDetails = {
+      quotation: this.requestForm.controls.quotation.value,
+      quantity: this.requestForm.controls.quantity.value,
+      fromDate: this.requestForm.controls.fromDate.value,
+      toDate: this.requestForm.controls.toDate.value,
+      productId: product.id
+    }
 
     var products = this.dataService.getProducts();
 
     let reqproduct = products[product.id];
-    
+    if(Number(reqproduct.inStock)<Number(this.requestDetails.quantity))
+    {
+      this.reqMessage='Stock is less than quantity.';
+    } else {
+      localStorage.setItem("requestDetails", JSON.stringify(this.requestDetails));
+    }
 
-    console.log(reqproduct);
+
+    console.log(reqproduct.inStock);
     
+  }
+
+  confirmRequest(product) {
+
+    console.log(this.responseForm.value);
+
+    if(this.responseForm.invalid) {
+      return;
+    }
+    this.isSubmitted=true;
+
   }
 }
