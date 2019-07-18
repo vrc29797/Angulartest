@@ -12,11 +12,7 @@ export class AuthService {
   }
 
   public isLoggedIn(): boolean {
-    if (localStorage.length > 0) {
-      return true;
-    } else {
-      return false;
-    }
+    return localStorage.getItem('ACCESS_TOKEN') !== null
   }
 
   public logout() {

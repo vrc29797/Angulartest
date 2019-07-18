@@ -19,7 +19,8 @@ export class LoginComponent implements OnInit {
 
   
 
-  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) { }
+  constructor(private authService: AuthService, private router: Router, 
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() { 
     if(this.authService.isLoggedIn())
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.loginForm  =  this.formBuilder.group({
         email: ['', Validators.required],
         password: ['', Validators.required]
-    });
+    }); 
 }
 get formControls() { return this.loginForm.controls; }
 
@@ -46,7 +47,8 @@ login(){
    { this.authService.login(this.loginForm.value);
     this.isCorrect=true;
     this.router.navigateByUrl('/');
-    location.reload()
+    this.authService.isLoggedIn();
+    
     
   }
 

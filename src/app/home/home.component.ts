@@ -25,6 +25,9 @@ export class HomeComponent implements OnInit {
     this.user=this.authService.getUserName();
   }
 
+  getProducts(){
+    products =  localStorage.getItem('products');
+  }
   requestProduct(product) {
     console.log("Requested the product ", product);
   }

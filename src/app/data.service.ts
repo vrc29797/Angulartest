@@ -14,6 +14,10 @@ export class DataService {
     return this.http.get('https://reqres.in/api/users')
   }
 
+  getProducts() {
+    return JSON.parse(localStorage.getItem('products'));
+  }
+
   getRequestedProducts() {
     return this.requestedProducts;
   }

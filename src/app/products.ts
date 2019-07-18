@@ -6,8 +6,8 @@ export const products = [
     description:
       'A crane capable of lifting up to 40 metric tonnes. Can be operated by a single person. Refuelled and ready to go.',
     isAvailable: true,
-    availableFrom: 'ABC',
-    availableTo: 'PQR',
+    availableFrom: '17-07-2019',
+    availableTo: '17-10-2019',
     inStock:10
   },
   {
@@ -18,8 +18,8 @@ export const products = [
     description:
       'An earth mover with a capacity of removing up to 200kg of earth material. Needs 2 people to operate. Caution! Heavy machinery.',
     isAvailable: true,
-    availableFrom: 'ABC',
-    availableTo: 'PQR',
+    availableFrom: '17-07-2019',
+    availableTo: '17-10-2019',
     inStock:10
   },
   {
@@ -29,8 +29,8 @@ export const products = [
     description:
       'Heavy road roller to be used only on roads with a minimum of 2 lanes. Has 1 main heavy duty metal roller, and 2 rear steered tyres.',
     isAvailable: true,
-    availableFrom: 'ABC',
-    availableTo: 'PQR',
+    availableFrom: '17-07-2019',
+    availableTo: '17-10-2019',
     inStock:10
   }
 ];
