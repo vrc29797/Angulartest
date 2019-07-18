@@ -62,8 +62,9 @@
     </form>
   </div>
 
-  <div *ngIf="user=='pro'">
-    
+  <p *ngIf="user=='pro' && isSubmitted"  class="h4">{{resMessage}}</p>
+  <div *ngIf="user=='pro' && !isSubmitted">
+
       <p class="h4">Pending Requests:</p>
       <form [formGroup]="responseForm" class="response-container" (ngSubmit)="confirmRequest(product)">
   

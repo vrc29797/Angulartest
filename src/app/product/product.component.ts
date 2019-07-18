@@ -24,9 +24,11 @@ export class ProductComponent implements OnInit {
   toDate;
   quantity;
   reqMessage = 'Request Submitted';
+  resMessage = 'Response Confirmed';
   instock = false;
 
   requestDetails;
+  responseDetails;
 
 
   constructor(
@@ -100,6 +102,14 @@ export class ProductComponent implements OnInit {
       return;
     }
     this.isSubmitted=true;
+
+    this.requestDetails = {
+      quotation: this.requestForm.controls.quotation.value
+    };
+
+    let products = JSON.parse(localStorage.getItem('products'));
+    let currentProduct =products[product.id];
+    currentProduct.inStock-=
 
   }
 }
