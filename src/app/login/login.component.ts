@@ -47,9 +47,8 @@ login(){
    { this.authService.login(this.loginForm.value);
     this.isCorrect=true;
     this.router.navigateByUrl('/');
-    this.authService.isLoggedIn();
-    
-    
+    location.reload()
+        
   }
 
   else if(this.loginForm.controls.email.value==this.loginForm.controls.password.value &&
